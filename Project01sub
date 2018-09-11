@@ -1,0 +1,51 @@
+import pandas as pd
+import numpy as np
+iris = pd.read_csv("data/iris.csv")
+df = pd.DataFrame(data= iris)
+
+df.info()
+
+df.Species.unique()
+
+df.describe()
+
+# Question 1
+### Part A
+The Iris data contains 5 columns.  Four of the columns are Float64 which provide dimensions for various iris samples.  The fifth column is a text column which contains the species name, as an object, for each of the iris samples.  Column names are as follows: Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, Species.  These column names specify dimensions for two parts common to iris species.
+### Part B
+Included in the data are 150 samples of iris petals.
+### Part C
+There are 3 unique species included in the data.  They consist of Setosa, Versicolor, and Virginica.
+# Question 2
+I used the .iloc and .iat functions to find the cell values for the 35th and 38th columns.  Given that python begins the index at 0 the indeces for the altered rows are 34 and 37 respectively.  Using .iloc, I found the values which needed replacement were in the Petal.Width column for row 34 and in the Sepal.Width and Petal.Length columns for row 37.  These values were corrected using the .iat function, and the result is displayed with the df.head(38) function.
+
+df.iloc[34][0:5]
+
+df.iat[34,3]=0.2
+
+df.iloc[34][0:5]
+
+df.iloc[37][0:5]
+
+df.iat[37,1]=3.6
+
+df.iat[37,2]=1.4
+
+df.iloc[37][0:5]
+
+df.head(38)
+
+# Question 3
+
+#Petal ratio: Petal Length/Petal Width
+df['Petal ratio'] = df['Petal.Length'] / df['Petal.Width']
+#Sepal ratio: Sepal Length/Sepal Width
+df['Sepal ratio'] = df['Sepal.Length'] / df['Sepal.Width']
+df.head(38)
+
+# Question 4
+I accomplised this by using the .groupby and .describe functions to sort the species and run descriptive statistics on the groups.  One thing I have not been able to figure out is, currently I still have the 25% and 75% values for both columns, which the question did not ask for.
+
+setgroup = df[["Species","Petal ratio","Sepal ratio"]].groupby('Species')
+descriptgroup = setgroup.describe()
+descriptgroup
