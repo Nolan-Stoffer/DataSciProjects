@@ -1,2 +1,2 @@
 # DataSciProjects
-Repository for UN5550
+Repository for my Data Science Projects
